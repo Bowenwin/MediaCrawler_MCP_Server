@@ -174,3 +174,4 @@ docs/.vitepress/cache
 # other gitignore
 .venv
 .refer
+.DS_Store
