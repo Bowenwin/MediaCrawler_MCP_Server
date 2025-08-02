@@ -33,9 +33,45 @@ uv run playwright install
 
 设置环境变量:
 ```shell
-MYSQL_HOST=localhost     # Database host
-MYSQL_PORT=3306         # Optional: Database port (defaults to 3306 if not specified)
-MYSQL_USER=your_username
-MYSQL_PASSWORD=your_password
-MYSQL_DATABASE=your_database
+MYSQL_DB_HOST=localhost     # Database host
+MYSQL_DB_PORT=3306         # Optional: Database port (defaults to 3306 if not specified)
+MYSQL_DB_USER=your_username
+MYSQL_DB_PWD=your_password
+MYSQL_DB_NAME=your_database
+CRAWLER_MAX_NOTES_COUNT=20 # number of notes you want to crawl
+MAX_CONCURRENCY_NUM=1 # number of concurrent crawlers
+ENABLE_GET_COMMENTS=true # crawl the comments or not
 ```
+
+## 🚀 使用
+添加至 `claude_desktop_config.json` or `cline_mcp_settings.json`
+
+```json
+"mediacrawler": {
+      "disabled": false,
+      "timeout": 600,
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "--directory",
+        "path/to/MediaCrawler_MCP_Server",
+        "run",
+        "main.py"
+      ],
+      "env": {
+        "MYSQL_DB_HOST": "localhost",
+        "MYSQL_DB_PORT": "3306",
+        "MYSQL_DB_USER": "your_username",
+        "MYSQL_DB_NAME": "your_database",
+        "MYSQL_DB_PWD": "your_password",
+        "CRAWLER_MAX_NOTES_COUNT": "20",
+        "MAX_CONCURRENCY_NUM": "1",
+        "ENABLE_GET_COMMENTS": "true"
+      }
+  }
+```
+## 🌰 例子
+
+1. `帮我爬取b站视频资料，关键词为"钱"，存储模式为mysql。`
+2. `帮我爬取b站视频号为BV1d54y1g7db,BV1Sz4y1U77N的视频存储模式为json。`
+3. `帮我爬取b站up主视频资料，其id为20813884,存储模式为csv。`
